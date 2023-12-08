@@ -27,6 +27,17 @@ func (to ComplexNumber) Add(from ComplexNumber) ComplexNumber {
 	}
 }
 
+// Average time complexity: O(1)
+// Worst time complexity:   O(1)
+// Space complexity:        O(1)
+// Programming Drill 1.1.1 Write a program that accepts two complex numbers and outputs their sum and their product.
+func (to ComplexNumber) Multiply(from ComplexNumber) ComplexNumber {
+	return ComplexNumber{
+		real:      (to.real * from.real) - (to.imaginary * from.imaginary),
+		imaginary: (to.real * from.imaginary) + (to.imaginary * from.real),
+	}
+}
+
 func (complexNumber ComplexNumber) Complex128() complex128 {
 	return complex(complexNumber.real, complexNumber.imaginary)
 }
