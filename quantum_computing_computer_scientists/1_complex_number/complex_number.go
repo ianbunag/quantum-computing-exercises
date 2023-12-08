@@ -1,6 +1,7 @@
 package complex_number
 
 import (
+	"math"
 	"strconv"
 )
 
@@ -72,6 +73,14 @@ func (complexNumber ComplexNumber) Conjugate() ComplexNumber {
 		real:      complexNumber.real,
 		imaginary: -complexNumber.imaginary,
 	}
+}
+
+// Average time complexity: O(1)
+// Worst time complexity:   O(1)
+// Space complexity:        O(1)
+// Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
+func (complexNumber ComplexNumber) Modulus() float64 {
+	return math.Sqrt(math.Pow(complexNumber.real, 2) + math.Pow(complexNumber.imaginary, 2))
 }
 
 func (complexNumber ComplexNumber) Complex128() complex128 {

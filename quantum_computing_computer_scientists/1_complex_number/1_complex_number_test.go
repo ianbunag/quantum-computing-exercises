@@ -1,6 +1,7 @@
 package complex_number_test
 
 import (
+	"math"
 	"math/cmplx"
 
 	. "github.com/onsi/ginkgo/v2"
@@ -103,5 +104,22 @@ var _ = Describe("ComplexNumber", func() {
 		actualConjugate3 := cmplx.Conj(1 - 2i)
 		Expect(complexFormatter.Format(conjugate3.Complex128())).To(Equal("(1+2i)"))
 		Expect(conjugate3.Complex128()).To(Equal(actualConjugate3))
+	})
+
+	It("should get modulus of complex numbers", func() {
+		modulus1 := NewComplexNumber(3, 4).Modulus()
+		actualModulus1 := cmplx.Abs(3 + 4i)
+		Expect(modulus1).To(Equal(float64(5)))
+		Expect(modulus1).To(Equal(actualModulus1))
+
+		modulus2 := NewComplexNumber(-2, -1).Modulus()
+		actualModulus2 := cmplx.Abs(-2 - 1i)
+		Expect(modulus2).To(Equal(math.Sqrt(5)))
+		Expect(modulus2).To(Equal(actualModulus2))
+
+		modulus3 := NewComplexNumber(1, -2).Modulus()
+		actualModulus3 := cmplx.Abs(1 - 2i)
+		Expect(modulus3).To(Equal(math.Sqrt(5)))
+		Expect(modulus3).To(Equal(actualModulus3))
 	})
 })
