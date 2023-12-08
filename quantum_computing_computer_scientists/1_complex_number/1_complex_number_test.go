@@ -1,6 +1,8 @@
 package complex_number_test
 
 import (
+	"math/cmplx"
+
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 
@@ -64,6 +66,25 @@ var _ = Describe("ComplexNumber", func() {
 			actualDifference3 := (1 + 2i) - (4 - 5i)
 			Expect(complexFormatter.Format(difference3.Complex128())).To(Equal("(-3+7i)"))
 			Expect(difference3.Complex128()).To(Equal(actualDifference3))
+		})
+
+		It("should get conjugate of complex numbers", func() {
+			complexFormatter := NewComplexFormatter('f', 0)
+
+			conjugate1 := NewComplexNumber(3, 4).Conjugate()
+			actualConjugate := cmplx.Conj(3 + 4i)
+			Expect(complexFormatter.Format(conjugate1.Complex128())).To(Equal("(3-4i)"))
+			Expect(conjugate1.Complex128()).To(Equal(actualConjugate))
+
+			conjugate2 := NewComplexNumber(-2, -1).Conjugate()
+			actualConjugate2 := cmplx.Conj(-2 - 1i)
+			Expect(complexFormatter.Format(conjugate2.Complex128())).To(Equal("(-2+1i)"))
+			Expect(conjugate2.Complex128()).To(Equal(actualConjugate2))
+
+			conjugate3 := NewComplexNumber(1, -2).Conjugate()
+			actualConjugate3 := cmplx.Conj(1 - 2i)
+			Expect(complexFormatter.Format(conjugate3.Complex128())).To(Equal("(1+2i)"))
+			Expect(conjugate3.Complex128()).To(Equal(actualConjugate3))
 		})
 	})
 })
