@@ -86,5 +86,24 @@ var _ = Describe("ComplexNumber", func() {
 			Expect(complexFormatter.Format(conjugate3.Complex128())).To(Equal("(1+2i)"))
 			Expect(conjugate3.Complex128()).To(Equal(actualConjugate3))
 		})
+
+		It("should divide complex numbers", func() {
+			complexFormatter := NewComplexFormatter('f', 2)
+
+			quotient1 := NewComplexNumber(2, 3).Divide(NewComplexNumber(1, -2))
+			actualQuotient1 := (2 + 3i) / (1 - 2i)
+			Expect(complexFormatter.Format(quotient1.Complex128())).To(Equal("(-0.80+1.40i)"))
+			Expect(quotient1.Complex128()).To(Equal(actualQuotient1))
+
+			quotient2 := NewComplexNumber(4, -1).Divide(NewComplexNumber(2, 1))
+			actualQuotient2 := (4 - 1i) / (2 + 1i)
+			Expect(complexFormatter.Format(quotient2.Complex128())).To(Equal("(1.40-1.20i)"))
+			Expect(quotient2.Complex128()).To(Equal(actualQuotient2))
+
+			quotient3 := NewComplexNumber(3, 2).Divide(NewComplexNumber(1, 1))
+			actualQuotient3 := (3 + 2i) / (1 + 1i)
+			Expect(complexFormatter.Format(quotient3.Complex128())).To(Equal("(2.50-0.50i)"))
+			Expect(quotient3.Complex128()).To(Equal(actualQuotient3))
+		})
 	})
 })

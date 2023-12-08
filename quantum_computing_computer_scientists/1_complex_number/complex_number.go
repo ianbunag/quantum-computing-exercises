@@ -20,10 +20,10 @@ func NewComplexNumber(real, imaginary float64) ComplexNumber {
 // Worst time complexity:   O(1)
 // Space complexity:        O(1)
 // Programming Drill 1.1.1 Write a program that accepts two complex numbers and outputs their sum and their product.
-func (to ComplexNumber) Add(from ComplexNumber) ComplexNumber {
+func (complexNumber ComplexNumber) Add(addend ComplexNumber) ComplexNumber {
 	return ComplexNumber{
-		real:      to.real + from.real,
-		imaginary: to.imaginary + from.imaginary,
+		real:      complexNumber.real + addend.real,
+		imaginary: complexNumber.imaginary + addend.imaginary,
 	}
 }
 
@@ -31,10 +31,10 @@ func (to ComplexNumber) Add(from ComplexNumber) ComplexNumber {
 // Worst time complexity:   O(1)
 // Space complexity:        O(1)
 // Programming Drill 1.1.1 Write a program that accepts two complex numbers and outputs their sum and their product.
-func (to ComplexNumber) Multiply(from ComplexNumber) ComplexNumber {
+func (complexNumber ComplexNumber) Multiply(multiplier ComplexNumber) ComplexNumber {
 	return ComplexNumber{
-		real:      (to.real * from.real) - (to.imaginary * from.imaginary),
-		imaginary: (to.real * from.imaginary) + (to.imaginary * from.real),
+		real:      (complexNumber.real * multiplier.real) - (complexNumber.imaginary * multiplier.imaginary),
+		imaginary: (complexNumber.real * multiplier.imaginary) + (complexNumber.imaginary * multiplier.real),
 	}
 }
 
@@ -42,10 +42,24 @@ func (to ComplexNumber) Multiply(from ComplexNumber) ComplexNumber {
 // Worst time complexity:   O(1)
 // Space complexity:        O(1)
 // Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
-func (to ComplexNumber) Subtract(from ComplexNumber) ComplexNumber {
+func (complexNumber ComplexNumber) Subtract(subtrahend ComplexNumber) ComplexNumber {
 	return ComplexNumber{
-		real:      to.real - from.real,
-		imaginary: to.imaginary - from.imaginary,
+		real:      complexNumber.real - subtrahend.real,
+		imaginary: complexNumber.imaginary - subtrahend.imaginary,
+	}
+}
+
+// Average time complexity: O(1)
+// Worst time complexity:   O(1)
+// Space complexity:        O(1)
+// Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
+func (complexNumber ComplexNumber) Divide(divisor ComplexNumber) ComplexNumber {
+	numerator := complexNumber.Multiply(divisor.Conjugate())
+	denominator := divisor.Multiply(divisor.Conjugate())
+
+	return ComplexNumber{
+		real:      numerator.real / denominator.real,
+		imaginary: numerator.imaginary / denominator.real,
 	}
 }
 
