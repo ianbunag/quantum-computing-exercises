@@ -1,13 +1,15 @@
 package complex_number
 
-import "fmt"
+import (
+	"strconv"
+)
 
 type ComplexNumber struct {
 	real      float64
 	imaginary float64
 }
 
-func New(real, imaginary float64) ComplexNumber {
+func NewComplexNumber(real, imaginary float64) ComplexNumber {
 	return ComplexNumber{
 		real:      real,
 		imaginary: imaginary,
@@ -17,6 +19,7 @@ func New(real, imaginary float64) ComplexNumber {
 // Average time complexity: O(1)
 // Worst time complexity:   O(1)
 // Space complexity:        O(1)
+// Programming Drill 1.1.1 Write a program that accepts two complex numbers and outputs their sum and their product.
 func (to ComplexNumber) Add(from ComplexNumber) ComplexNumber {
 	return ComplexNumber{
 		real:      to.real + from.real,
@@ -24,34 +27,29 @@ func (to ComplexNumber) Add(from ComplexNumber) ComplexNumber {
 	}
 }
 
-func (complex ComplexNumber) String() string {
-	return FormatComplexNumber(complex)
+func (complexNumber ComplexNumber) Complex128() complex128 {
+	return complex(complexNumber.real, complexNumber.imaginary)
 }
 
-func simpleFormat(real, imaginary float64) string {
-	intReal, intImaginary := int(real), int(imaginary)
-
-	if intReal == 0 {
-		return fmt.Sprintf("%di", intImaginary)
-	}
-
-	if intImaginary == 0 {
-		return fmt.Sprintf("%d", intReal)
-	}
-
-	if intImaginary < 0 {
-		return fmt.Sprintf("%d - %di", intReal, intImaginary*-1)
-	}
-
-	return fmt.Sprintf("%d + %di", intReal, intImaginary)
+type ComplexFormatter struct {
+	fmt     byte
+	prec    int
+	bitSize int
 }
 
-// Format ComplexNumber in the simple form of a + bi.
-func FormatComplexNumber(complex ComplexNumber) string {
-	return simpleFormat(complex.real, complex.imaginary)
+func NewComplexFormatter(fmt byte, prec int) ComplexFormatter {
+	return ComplexFormatter{
+		fmt:     fmt,
+		prec:    prec,
+		bitSize: 128,
+	}
 }
 
-// Format complex128 in the simple form of a + bi.
-func FormatComplex128(complex complex128) string {
-	return simpleFormat(real(complex), imag(complex))
+func (formatter ComplexFormatter) Format(complexNumber complex128) string {
+	return strconv.FormatComplex(
+		complexNumber,
+		formatter.fmt,
+		formatter.prec,
+		formatter.bitSize,
+	)
 }
