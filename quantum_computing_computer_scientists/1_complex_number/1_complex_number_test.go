@@ -46,5 +46,24 @@ var _ = Describe("ComplexNumber", func() {
 			Expect(complexFormatter.Format(product3.Complex128())).To(Equal("(-4+7i)"))
 			Expect(product3.Complex128()).To(Equal(actualProduct3))
 		})
+
+		It("should subtract complex numbers", func() {
+			complexFormatter := NewComplexFormatter('f', 0)
+
+			difference1 := NewComplexNumber(5, 2).Subtract(NewComplexNumber(3, 4))
+			actualDifference1 := (5 + 2i) - (3 + 4i)
+			Expect(complexFormatter.Format(difference1.Complex128())).To(Equal("(2-2i)"))
+			Expect(difference1.Complex128()).To(Equal(actualDifference1))
+
+			difference2 := NewComplexNumber(-2, -1).Subtract(NewComplexNumber(3, 2))
+			actualDifference2 := (-2 - 1i) - (3 + 2i)
+			Expect(complexFormatter.Format(difference2.Complex128())).To(Equal("(-5-3i)"))
+			Expect(difference2.Complex128()).To(Equal(actualDifference2))
+
+			difference3 := NewComplexNumber(1, 2).Subtract(NewComplexNumber(4, -5))
+			actualDifference3 := (1 + 2i) - (4 - 5i)
+			Expect(complexFormatter.Format(difference3.Complex128())).To(Equal("(-3+7i)"))
+			Expect(difference3.Complex128()).To(Equal(actualDifference3))
+		})
 	})
 })

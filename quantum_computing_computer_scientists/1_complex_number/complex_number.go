@@ -38,6 +38,17 @@ func (to ComplexNumber) Multiply(from ComplexNumber) ComplexNumber {
 	}
 }
 
+// Average time complexity: O(1)
+// Worst time complexity:   O(1)
+// Space complexity:        O(1)
+// Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
+func (to ComplexNumber) Subtract(from ComplexNumber) ComplexNumber {
+	return ComplexNumber{
+		real:      to.real - from.real,
+		imaginary: to.imaginary - from.imaginary,
+	}
+}
+
 func (complexNumber ComplexNumber) Complex128() complex128 {
 	return complex(complexNumber.real, complexNumber.imaginary)
 }
