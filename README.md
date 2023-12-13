@@ -1,6 +1,6 @@
 # Quantum Computing Exercises
 Collection of Quantum computing programming exercises.
-- Quantum Computing for Computer Scientists (Noson S. Yanofsky, Mirco A. Mannucci)
+From the book Quantum Computing for Computer Scientists (Noson S. Yanofsky, Mirco A. Mannucci).
 
 ## Install test executable
 ```sh

@@ -83,6 +83,17 @@ func (complexNumber ComplexNumber) Modulus() float64 {
 	return math.Sqrt(math.Pow(complexNumber.real, 2) + math.Pow(complexNumber.imaginary, 2))
 }
 
+// Average time complexity: O(1)
+// Worst time complexity:   O(1)
+// Space complexity:        O(1)
+// Programming Drill 1.3.1 Write a program that converts a complex number from its Cartesian representation to its polar representation and vice versa.
+func (complexNumber ComplexNumber) Polar() (float64, float64) {
+	magnitude := complexNumber.Modulus()
+	argument := math.Atan2(complexNumber.imaginary, complexNumber.real)
+
+	return magnitude, argument
+}
+
 func (complexNumber ComplexNumber) Complex128() complex128 {
 	return complex(complexNumber.real, complexNumber.imaginary)
 }
