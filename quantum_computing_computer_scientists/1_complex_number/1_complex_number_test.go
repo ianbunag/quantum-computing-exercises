@@ -139,4 +139,18 @@ var _ = Describe("ComplexNumber", func() {
 		Expect(magnitude3).To(Equal(actualMagnitude3))
 		Expect(argument3).To(Equal(actualArgument3))
 	})
+
+	It("should get complex number from polar representation", func() {
+		complexNumber1 := NewComplexNumberFromPolar(3, math.Pi/4)
+		actualComplexNumber1 := cmplx.Rect(3, math.Pi/4)
+		Expect(complexNumber1.Complex128()).To(Equal(actualComplexNumber1))
+
+		complexNumber2 := NewComplexNumberFromPolar(2, -(math.Pi / 3))
+		actualComplexNumber2 := cmplx.Rect(2, -(math.Pi / 3))
+		Expect(complexNumber2.Complex128()).To(Equal(actualComplexNumber2))
+
+		complexNumber3 := NewComplexNumberFromPolar(1, math.Pi)
+		actualComplexNumber3 := cmplx.Rect(1, math.Pi)
+		Expect(complexNumber3.Complex128()).To(Equal(actualComplexNumber3))
+	})
 })

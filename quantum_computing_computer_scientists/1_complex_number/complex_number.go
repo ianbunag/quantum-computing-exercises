@@ -17,9 +17,14 @@ func NewComplexNumber(real, imaginary float64) ComplexNumber {
 	}
 }
 
-// Average time complexity: O(1)
-// Worst time complexity:   O(1)
-// Space complexity:        O(1)
+// Programming Drill 1.3.1 Write a program that converts a complex number from its Cartesian representation to its polar representation and vice versa.
+func NewComplexNumberFromPolar(magnitude, argument float64) ComplexNumber {
+	return NewComplexNumber(
+		magnitude*math.Cos(argument),
+		magnitude*math.Sin(argument),
+	)
+}
+
 // Programming Drill 1.1.1 Write a program that accepts two complex numbers and outputs their sum and their product.
 func (complexNumber ComplexNumber) Add(addend ComplexNumber) ComplexNumber {
 	return ComplexNumber{
@@ -28,9 +33,6 @@ func (complexNumber ComplexNumber) Add(addend ComplexNumber) ComplexNumber {
 	}
 }
 
-// Average time complexity: O(1)
-// Worst time complexity:   O(1)
-// Space complexity:        O(1)
 // Programming Drill 1.1.1 Write a program that accepts two complex numbers and outputs their sum and their product.
 func (complexNumber ComplexNumber) Multiply(multiplier ComplexNumber) ComplexNumber {
 	return ComplexNumber{
@@ -39,9 +41,6 @@ func (complexNumber ComplexNumber) Multiply(multiplier ComplexNumber) ComplexNum
 	}
 }
 
-// Average time complexity: O(1)
-// Worst time complexity:   O(1)
-// Space complexity:        O(1)
 // Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
 func (complexNumber ComplexNumber) Subtract(subtrahend ComplexNumber) ComplexNumber {
 	return ComplexNumber{
@@ -50,9 +49,6 @@ func (complexNumber ComplexNumber) Subtract(subtrahend ComplexNumber) ComplexNum
 	}
 }
 
-// Average time complexity: O(1)
-// Worst time complexity:   O(1)
-// Space complexity:        O(1)
 // Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
 func (complexNumber ComplexNumber) Divide(divisor ComplexNumber) ComplexNumber {
 	numerator := complexNumber.Multiply(divisor.Conjugate())
@@ -64,9 +60,6 @@ func (complexNumber ComplexNumber) Divide(divisor ComplexNumber) ComplexNumber {
 	}
 }
 
-// Average time complexity: O(1)
-// Worst time complexity:   O(1)
-// Space complexity:        O(1)
 // Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
 func (complexNumber ComplexNumber) Conjugate() ComplexNumber {
 	return ComplexNumber{
@@ -75,17 +68,11 @@ func (complexNumber ComplexNumber) Conjugate() ComplexNumber {
 	}
 }
 
-// Average time complexity: O(1)
-// Worst time complexity:   O(1)
-// Space complexity:        O(1)
 // Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
 func (complexNumber ComplexNumber) Modulus() float64 {
 	return math.Sqrt(math.Pow(complexNumber.real, 2) + math.Pow(complexNumber.imaginary, 2))
 }
 
-// Average time complexity: O(1)
-// Worst time complexity:   O(1)
-// Space complexity:        O(1)
 // Programming Drill 1.3.1 Write a program that converts a complex number from its Cartesian representation to its polar representation and vice versa.
 func (complexNumber ComplexNumber) Polar() (float64, float64) {
 	magnitude := complexNumber.Modulus()
