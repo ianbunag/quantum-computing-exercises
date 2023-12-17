@@ -11,7 +11,7 @@ import (
 	ComplexFormatter "github.com/yvnbunag/quantum-computing-exercises/quantum_computing_computer_scientists/2_ComplexFormatter"
 )
 
-var _ = Describe("ComplexNumber", func() {
+var _ = Describe("1ComplexNumber", func() {
 	It("should add complex numbers", func() {
 		complexFormatter := ComplexFormatter.New('f', 0)
 

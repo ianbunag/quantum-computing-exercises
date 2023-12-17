@@ -7,7 +7,7 @@ import (
 	ComplexFormatter "github.com/yvnbunag/quantum-computing-exercises/quantum_computing_computer_scientists/2_ComplexFormatter"
 )
 
-var _ = Describe("ComplexFormatter", func() {
+var _ = Describe("2ComplexFormatter", func() {
 	It("should format complex numbers", func() {
 		intFormatter := ComplexFormatter.New('f', 0)
 		Expect(intFormatter.Format(1 + 2i)).To(Equal("(1+2i)"))
