@@ -1,4 +1,4 @@
-package complex_number_test
+package ComplexFormatter_test
 
 import (
 	"testing"
@@ -7,7 +7,7 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-func Test1ComplexNumber(t *testing.T) {
+func Test2ComplexFormatter(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "1ComplexNumber Suite")
+	RunSpecs(t, "2ComplexFormatter Suite")
 }

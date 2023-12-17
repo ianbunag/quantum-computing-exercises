@@ -1,8 +1,7 @@
-package complex_number
+package ComplexNumber
 
 import (
 	"math"
-	"strconv"
 )
 
 type ComplexNumber struct {
@@ -10,7 +9,7 @@ type ComplexNumber struct {
 	imaginary float64
 }
 
-func NewComplexNumber(real, imaginary float64) ComplexNumber {
+func New(real, imaginary float64) ComplexNumber {
 	return ComplexNumber{
 		real:      real,
 		imaginary: imaginary,
@@ -18,8 +17,8 @@ func NewComplexNumber(real, imaginary float64) ComplexNumber {
 }
 
 // Programming Drill 1.3.1 Write a program that converts a complex number from its Cartesian representation to its polar representation and vice versa.
-func NewComplexNumberFromPolar(magnitude, argument float64) ComplexNumber {
-	return NewComplexNumber(
+func FromPolar(magnitude, argument float64) ComplexNumber {
+	return New(
 		magnitude*math.Cos(argument),
 		magnitude*math.Sin(argument),
 	)
@@ -34,6 +33,7 @@ func (complexNumber ComplexNumber) Add(addend ComplexNumber) ComplexNumber {
 }
 
 // Programming Drill 1.1.1 Write a program that accepts two complex numbers and outputs their sum and their product.
+// Programming Drill 1.3.3 Expand your program. Add functions for multiplication, division, and returning the polar coordinates of a number.
 func (complexNumber ComplexNumber) Multiply(multiplier ComplexNumber) ComplexNumber {
 	return ComplexNumber{
 		real:      (complexNumber.real * multiplier.real) - (complexNumber.imaginary * multiplier.imaginary),
@@ -50,6 +50,7 @@ func (complexNumber ComplexNumber) Subtract(subtrahend ComplexNumber) ComplexNum
 }
 
 // Programming Drill 1.2.1 Take the program that you wrote in the last programming drill and make it also perform subtraction and division of complex numbers. In addition, let the user enter a complex number and have the computer return its modulus and conjugate.
+// Programming Drill 1.3.3 Expand your program. Add functions for multiplication, division, and returning the polar coordinates of a number.
 func (complexNumber ComplexNumber) Divide(divisor ComplexNumber) ComplexNumber {
 	numerator := complexNumber.Multiply(divisor.Conjugate())
 	denominator := divisor.Multiply(divisor.Conjugate())
@@ -74,6 +75,7 @@ func (complexNumber ComplexNumber) Modulus() float64 {
 }
 
 // Programming Drill 1.3.1 Write a program that converts a complex number from its Cartesian representation to its polar representation and vice versa.
+// Programming Drill 1.3.3 Expand your program. Add functions for multiplication, division, and returning the polar coordinates of a number.
 func (complexNumber ComplexNumber) Polar() (float64, float64) {
 	magnitude := complexNumber.Modulus()
 	argument := math.Atan2(complexNumber.imaginary, complexNumber.real)
@@ -83,27 +85,4 @@ func (complexNumber ComplexNumber) Polar() (float64, float64) {
 
 func (complexNumber ComplexNumber) Complex128() complex128 {
 	return complex(complexNumber.real, complexNumber.imaginary)
-}
-
-type ComplexFormatter struct {
-	fmt     byte
-	prec    int
-	bitSize int
-}
-
-func NewComplexFormatter(fmt byte, prec int) ComplexFormatter {
-	return ComplexFormatter{
-		fmt:     fmt,
-		prec:    prec,
-		bitSize: 128,
-	}
-}
-
-func (formatter ComplexFormatter) Format(complexNumber complex128) string {
-	return strconv.FormatComplex(
-		complexNumber,
-		formatter.fmt,
-		formatter.prec,
-		formatter.bitSize,
-	)
 }

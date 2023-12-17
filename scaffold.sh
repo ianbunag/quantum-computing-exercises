@@ -16,7 +16,7 @@ package $EXERCISE
 // Average time complexity: O(1)
 // Worst time complexity:   O(1)
 // Space complexity:        O(1)
-func Exercise() {}
+func New() {}
 EOF
 
   cd $DIRECTORY
