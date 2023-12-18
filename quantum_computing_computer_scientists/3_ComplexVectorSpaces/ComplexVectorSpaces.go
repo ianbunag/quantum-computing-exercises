@@ -33,3 +33,17 @@ func (vector Vector) Inverse() Vector {
 
 	return inverse
 }
+
+// Average time complexity: O(n)
+// Worst time complexity:   O(n)
+// Space complexity:        O(n)
+// Programming Drill 2.1.1 Write three functions that perform the addition, inverse, and scalar multiplication operations for Cn, i.e., write a function that accepts the appropriate input for each of the operations and outputs the vector.
+func (vector Vector) ScalarMultiply(multiplier Scalar) Vector {
+	product := make(Vector, len(vector))
+
+	for index, scalar := range vector {
+		product[index] = scalar * multiplier
+	}
+
+	return product
+}
