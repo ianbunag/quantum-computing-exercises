@@ -15,4 +15,12 @@ var _ = Describe("3ComplexVectorSpaces", func() {
 
 		Expect(sum).To(Equal(ComplexVectorSpaces.Vector{6 + 8i, 4 + -4i}))
 	})
+
+	It("should invert vectors", func() {
+		vector := ComplexVectorSpaces.Vector{1 + 2i, -3 + 4i}
+		inverse := vector.Inverse()
+
+		Expect(inverse).To(Equal(ComplexVectorSpaces.Vector{-1 + -2i, 3 + -4i}))
+		Expect(vector.Add(inverse)).To(Equal(ComplexVectorSpaces.Vector{0 + 0i, 0 + 0i}))
+	})
 })

@@ -19,3 +19,17 @@ func (vector Vector) Add(addend Vector) Vector {
 
 	return sum
 }
+
+// Average time complexity: O(n)
+// Worst time complexity:   O(n)
+// Space complexity:        O(n)
+// Programming Drill 2.1.1 Write three functions that perform the addition, inverse, and scalar multiplication operations for Cn, i.e., write a function that accepts the appropriate input for each of the operations and outputs the vector.
+func (vector Vector) Inverse() Vector {
+	inverse := make(Vector, len(vector))
+
+	for index, scalar := range vector {
+		inverse[index] = scalar * -1
+	}
+
+	return inverse
+}
