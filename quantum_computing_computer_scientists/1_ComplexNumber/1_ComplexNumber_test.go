@@ -1,6 +1,7 @@
 package ComplexNumber_test
 
 import (
+	"fmt"
 	"math"
 	"math/cmplx"
 
@@ -153,5 +154,82 @@ var _ = Describe("1ComplexNumber", func() {
 		complexNumber3 := ComplexNumber.FromPolar(1, math.Pi)
 		actualComplexNumber3 := cmplx.Rect(1, math.Pi)
 		Expect(complexNumber3.Complex128()).To(Equal(actualComplexNumber3))
+	})
+
+	It("should draw list of complex numbers", func() {
+		wrap := func(drawing string) string {
+			return fmt.Sprintf("\n%s\n", drawing)
+		}
+		original := []ComplexNumber.ComplexNumber{
+			ComplexNumber.New(2, 2),
+			ComplexNumber.New(2, 1),
+			ComplexNumber.New(2, 0),
+			ComplexNumber.New(2, -1),
+			ComplexNumber.New(2, -2),
+			ComplexNumber.New(1, -2),
+			ComplexNumber.New(0, -2),
+			ComplexNumber.New(-1, -2),
+			ComplexNumber.New(-2, -2),
+			ComplexNumber.New(-2, -1),
+			ComplexNumber.New(-2, 0),
+			ComplexNumber.New(-2, 1),
+			ComplexNumber.New(-2, 2),
+			ComplexNumber.New(-1, 2),
+			ComplexNumber.New(0, 2),
+			ComplexNumber.New(1, 2),
+		}
+		expectedOriginal := `
+-------
+|•••••|
+|•   •|
+|•   •|
+|•   •|
+|•••••|
+-------
+`
+		Expect(wrap(ComplexNumber.Draw(original))).To(Equal(expectedOriginal))
+
+		double := func(complexNumber ComplexNumber.ComplexNumber) ComplexNumber.ComplexNumber {
+			return complexNumber.Multiply(ComplexNumber.New(2, 2))
+		}
+		doubled := ComplexNumber.Map(original, double)
+		expectedDoubled := `
+-------------------
+|        •        |
+|                 |
+|      •   •      |
+|                 |
+|    •       •    |
+|                 |
+|  •           •  |
+|                 |
+|•               •|
+|                 |
+|  •           •  |
+|                 |
+|    •       •    |
+|                 |
+|      •   •      |
+|                 |
+|        •        |
+-------------------
+`
+		Expect(wrap(ComplexNumber.Draw(doubled))).To(Equal(expectedDoubled))
+
+		halve := func(complexNumber ComplexNumber.ComplexNumber) ComplexNumber.ComplexNumber {
+			return complexNumber.Divide(ComplexNumber.New(2, 2))
+		}
+		halved := ComplexNumber.Map(doubled, halve)
+		expectedHalved := `
+-------
+|•••••|
+|•   •|
+|•   •|
+|•   •|
+|•••••|
+-------
+`
+		Expect(wrap(ComplexNumber.Draw(halved))).To(Equal(expectedHalved))
+		Expect("\n" + ComplexNumber.Draw(halved) + "\n").To(Equal(expectedHalved))
 	})
 })

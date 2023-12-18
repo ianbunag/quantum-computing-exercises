@@ -2,6 +2,7 @@ package ComplexNumber
 
 import (
 	"math"
+	"strings"
 )
 
 type ComplexNumber struct {
@@ -85,4 +86,82 @@ func (complexNumber ComplexNumber) Polar() (float64, float64) {
 
 func (complexNumber ComplexNumber) Complex128() complex128 {
 	return complex(complexNumber.real, complexNumber.imaginary)
+}
+
+type Coordinate = [2]int
+
+// Average time complexity: O(n)
+// Worst time complexity:   O(n)
+// Space complexity:        O(n)
+// Programming Drill 1.3.2 If you like graphics, write a program that accepts a small drawing around the origin of the complex plane and a complex number. The program should change the drawing by multiplying every point of the diagram by a complex number.
+func Map(complexNumbers []ComplexNumber, mapper func(ComplexNumber) ComplexNumber) []ComplexNumber {
+	mapped := make([]ComplexNumber, len(complexNumbers))
+
+	for index, complexNumber := range complexNumbers {
+		mapped[index] = mapper(complexNumber)
+	}
+
+	return mapped
+}
+
+// Average time complexity: O(n ^ 2)
+// Worst time complexity:   O(n ^ 2)
+// Space complexity:        O(n)
+// Programming Drill 1.3.2 If you like graphics, write a program that accepts a small drawing around the origin of the complex plane and a complex number. The program should change the drawing by multiplying every point of the diagram by a complex number.
+func Draw(complexNumbers []ComplexNumber) string {
+	coordinates := make([]Coordinate, len(complexNumbers))
+	pixels := make(map[Coordinate]bool)
+	radius := 0
+
+	for index, complexNumber := range complexNumbers {
+		imaginary := int(math.Round(complexNumber.imaginary))
+		real := int(math.Round(complexNumber.real))
+
+		coordinate := Coordinate{imaginary, real}
+		coordinates[index] = coordinate
+		pixels[coordinate] = true
+		radius = maxInt(radius, absInt(imaginary))
+		radius = maxInt(radius, absInt(real))
+	}
+
+	var builder strings.Builder
+	diameter := (radius * 2) + 1
+	pixel, space, verticalBoundary, newLine := "•", " ", "|", "\n"
+	horizontalBoundary := strings.Repeat("-", diameter+2)
+
+	builder.WriteString(horizontalBoundary + newLine)
+	for imaginaryIndex := 0; imaginaryIndex < diameter; imaginaryIndex += 1 {
+		builder.WriteString(verticalBoundary)
+
+		for realIndex := 0; realIndex < diameter; realIndex += 1 {
+			imaginary, real := radius-imaginaryIndex, radius-realIndex
+
+			if pixels[Coordinate{imaginary, real}] {
+				builder.WriteString(pixel)
+			} else {
+				builder.WriteString(space)
+			}
+		}
+
+		builder.WriteString(verticalBoundary + newLine)
+	}
+	builder.WriteString(horizontalBoundary)
+
+	return builder.String()
+}
+
+func maxInt(first, second int) int {
+	if first > second {
+		return first
+	}
+
+	return second
+}
+
+func absInt(number int) int {
+	if number < 0 {
+		return -number
+	}
+
+	return number
 }
