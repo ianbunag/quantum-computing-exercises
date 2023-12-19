@@ -50,9 +50,9 @@ func (vector Vector) ScalarMultiply(multiplier Scalar) Vector {
 	return product
 }
 
-// Average time complexity: O(n)
-// Worst time complexity:   O(n)
-// Space complexity:        O(n)
+// Average time complexity: O(n^2)
+// Worst time complexity:   O(n^2)
+// Space complexity:        O(n^2)
 // Programming Drill 2.2.1 Convert your functions from the last programming drill so that instead of accepting elements of Cn, they accept elements of Cm×n.
 func (matrix Matrix) Add(addend Matrix) Matrix {
 	sum := make(Matrix, len(matrix))
@@ -64,9 +64,9 @@ func (matrix Matrix) Add(addend Matrix) Matrix {
 	return sum
 }
 
-// Average time complexity: O(n)
-// Worst time complexity:   O(n)
-// Space complexity:        O(n)
+// Average time complexity: O(n^2)
+// Worst time complexity:   O(n^2)
+// Space complexity:        O(n^2)
 // Programming Drill 2.2.1 Convert your functions from the last programming drill so that instead of accepting elements of Cn, they accept elements of Cm×n.
 func (matrix Matrix) Inverse() Matrix {
 	sum := make(Matrix, len(matrix))
@@ -78,15 +78,35 @@ func (matrix Matrix) Inverse() Matrix {
 	return sum
 }
 
-// Average time complexity: O(n)
-// Worst time complexity:   O(n)
-// Space complexity:        O(n)
+// Average time complexity: O(n^2)
+// Worst time complexity:   O(n^2)
+// Space complexity:        O(n^2)
 // Programming Drill 2.2.1 Convert your functions from the last programming drill so that instead of accepting elements of Cn, they accept elements of Cm×n.
 func (matrix Matrix) ScalarMultiply(multiplier Scalar) Matrix {
 	product := make(Matrix, len(matrix))
 
 	for index := range product {
 		product[index] = matrix[index].ScalarMultiply(multiplier)
+	}
+
+	return product
+}
+
+// Average time complexity: O(n^3)
+// Worst time complexity:   O(n^3)
+// Space complexity:        O(n^2)
+// Programming Drill 2.2.2 Write a function that accepts two complex matrices of the appropriate size. The function should do matrix multiplication and return the result.
+func (matrix Matrix) Multiply(multiplier Matrix) Matrix {
+	product := make(Matrix, len(matrix))
+
+	for columnIndex := range product {
+		product[columnIndex] = make(Vector, len(matrix))
+
+		for rowIndex := range product[columnIndex] {
+			for correspondingIndex := 0; correspondingIndex < len(matrix); correspondingIndex++ {
+				product[columnIndex][rowIndex] += multiplier[columnIndex][correspondingIndex] * matrix[correspondingIndex][rowIndex]
+			}
+		}
 	}
 
 	return product

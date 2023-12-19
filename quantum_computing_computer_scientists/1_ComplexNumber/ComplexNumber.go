@@ -104,8 +104,8 @@ func Map(complexNumbers []ComplexNumber, mapper func(ComplexNumber) ComplexNumbe
 	return mapped
 }
 
-// Average time complexity: O(n ^ 2)
-// Worst time complexity:   O(n ^ 2)
+// Average time complexity: O(n^2)
+// Worst time complexity:   O(n^2)
 // Space complexity:        O(n)
 // Programming Drill 1.3.2 If you like graphics, write a program that accepts a small drawing around the origin of the complex plane and a complex number. The program should change the drawing by multiplying every point of the diagram by a complex number.
 func Draw(complexNumbers []ComplexNumber) string {

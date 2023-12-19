@@ -86,4 +86,31 @@ var _ = Describe("3ComplexVectorSpaces", func() {
 			{11 + 1i, 15 + 1i},
 		}))
 	})
+
+	It("should multiply matrices", func() {
+		matrix1 := ComplexVectorSpaces.Matrix{
+			{3 + 2i, 1, 4 - 1i},
+			{0, 4 + 2i, 0},
+			{5 - 6i, 0 + 1i, 4},
+		}
+		matrix2 := ComplexVectorSpaces.Matrix{
+			{5, 0, 7 - 4i},
+			{2 - 1i, 4 + 5i, 2 + 7i},
+			{6 - 4i, 2, 0},
+		}
+
+		product := matrix1.Multiply(matrix2)
+		Expect(product).To(Equal(ComplexVectorSpaces.Matrix{
+			{26 - 52i, 9 + 7i, 48 - 21i},
+			{60 + 24i, 1 + 29i, 15 + 22i},
+			{26, 14, 20 - 22i},
+		}))
+
+		inverseProduct := matrix2.Multiply(matrix1)
+		Expect(inverseProduct).To(Equal(ComplexVectorSpaces.Matrix{
+			{37 - 13i, 12 + 3i, 31 + 9i},
+			{10, 6 + 28i, -6 + 32i},
+			{50 - 44i, 3 + 4i, 4 - 60i},
+		}))
+	})
 })
