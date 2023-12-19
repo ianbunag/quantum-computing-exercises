@@ -2,8 +2,10 @@ package ComplexVectorSpaces
 
 type Scalar complex128
 
+// Column of scalars
 type Vector []Scalar
 
+// Columns of scalars
 type Matrix []Vector
 
 // Average time complexity: O(n)
@@ -43,6 +45,48 @@ func (vector Vector) ScalarMultiply(multiplier Scalar) Vector {
 
 	for index, scalar := range vector {
 		product[index] = scalar * multiplier
+	}
+
+	return product
+}
+
+// Average time complexity: O(n)
+// Worst time complexity:   O(n)
+// Space complexity:        O(n)
+// Programming Drill 2.2.1 Convert your functions from the last programming drill so that instead of accepting elements of Cn, they accept elements of Cm×n.
+func (matrix Matrix) Add(addend Matrix) Matrix {
+	sum := make(Matrix, len(matrix))
+
+	for index := range sum {
+		sum[index] = matrix[index].Add(addend[index])
+	}
+
+	return sum
+}
+
+// Average time complexity: O(n)
+// Worst time complexity:   O(n)
+// Space complexity:        O(n)
+// Programming Drill 2.2.1 Convert your functions from the last programming drill so that instead of accepting elements of Cn, they accept elements of Cm×n.
+func (matrix Matrix) Inverse() Matrix {
+	sum := make(Matrix, len(matrix))
+
+	for index := range sum {
+		sum[index] = matrix[index].Inverse()
+	}
+
+	return sum
+}
+
+// Average time complexity: O(n)
+// Worst time complexity:   O(n)
+// Space complexity:        O(n)
+// Programming Drill 2.2.1 Convert your functions from the last programming drill so that instead of accepting elements of Cn, they accept elements of Cm×n.
+func (matrix Matrix) ScalarMultiply(multiplier Scalar) Matrix {
+	product := make(Matrix, len(matrix))
+
+	for index := range product {
+		product[index] = matrix[index].ScalarMultiply(multiplier)
 	}
 
 	return product
