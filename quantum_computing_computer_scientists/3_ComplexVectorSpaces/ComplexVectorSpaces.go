@@ -27,13 +27,13 @@ func (vector Vector) Add(addend Vector) Vector {
 // Space complexity:        O(n)
 // Programming Drill 2.1.1 Write three functions that perform the addition, inverse, and scalar multiplication operations for Cn, i.e., write a function that accepts the appropriate input for each of the operations and outputs the vector.
 func (vector Vector) Inverse() Vector {
-	inverse := make(Vector, len(vector))
+	inversed := make(Vector, len(vector))
 
 	for index, scalar := range vector {
-		inverse[index] = scalar * -1
+		inversed[index] = scalar * -1
 	}
 
-	return inverse
+	return inversed
 }
 
 // Average time complexity: O(n)
@@ -54,13 +54,13 @@ func (vector Vector) ScalarMultiply(multiplier Scalar) Vector {
 // Worst time complexity:   O(n)
 // Space complexity:        O(n)
 func (vector Vector) Conjugate() Vector {
-	conjugate := make(Vector, len(vector))
+	conjugated := make(Vector, len(vector))
 
 	for index, scalar := range vector {
-		conjugate[index] = complex(real(scalar), -imag(scalar))
+		conjugated[index] = complex(real(scalar), -imag(scalar))
 	}
 
-	return conjugate
+	return conjugated
 }
 
 // Average time complexity: O(n^2)
@@ -82,13 +82,13 @@ func (matrix Matrix) Add(addend Matrix) Matrix {
 // Space complexity:        O(n^2)
 // Programming Drill 2.2.1 Convert your functions from the last programming drill so that instead of accepting elements of Cn, they accept elements of Cm×n.
 func (matrix Matrix) Inverse() Matrix {
-	sum := make(Matrix, len(matrix))
+	inversed := make(Matrix, len(matrix))
 
-	for index := range sum {
-		sum[index] = matrix[index].Inverse()
+	for index := range inversed {
+		inversed[index] = matrix[index].Inverse()
 	}
 
-	return sum
+	return inversed
 }
 
 // Average time complexity: O(n^2)
@@ -129,13 +129,13 @@ func (matrix Matrix) Multiply(multiplier Matrix) Matrix {
 // Worst time complexity:   O(n^2)
 // Space complexity:        O(n^2)
 func (matrix Matrix) Conjugate() Matrix {
-	conjugate := make(Matrix, len(matrix))
+	conjugated := make(Matrix, len(matrix))
 
-	for columnIndex := range conjugate {
-		conjugate[columnIndex] = matrix[columnIndex].Conjugate()
+	for columnIndex := range conjugated {
+		conjugated[columnIndex] = matrix[columnIndex].Conjugate()
 	}
 
-	return conjugate
+	return conjugated
 }
 
 // Average time complexity: O(n^3)
@@ -158,4 +158,25 @@ func (matrix Matrix) Transpose() Matrix {
 	}
 
 	return transposed
+}
+
+// Average time complexity: O(n^3)
+// Worst time complexity:   O(n^3)
+// Space complexity:        O(n^2)
+func (matrix Matrix) Adjoint() Matrix {
+	adjointed := make(Matrix, len(matrix))
+
+	for columnIndex := range adjointed {
+		adjointed[columnIndex] = matrix[columnIndex].Conjugate()
+	}
+
+	for columnIndex := range adjointed {
+		for rowIndex := range adjointed[columnIndex] {
+			if rowIndex > columnIndex {
+				adjointed[rowIndex][columnIndex], adjointed[columnIndex][rowIndex] = adjointed[columnIndex][rowIndex], adjointed[rowIndex][columnIndex]
+			}
+		}
+	}
+
+	return adjointed
 }

@@ -144,8 +144,7 @@ var _ = Describe("3ComplexVectorSpaces", func() {
 			{1 + 2i, 3 + 4i},
 			{5 + 6i, 7 + 8i},
 		}
-		transposed2x2 := matrix2x2.Transpose()
-		Expect(transposed2x2).To(Equal(ComplexVectorSpaces.Matrix{
+		Expect(matrix2x2.Transpose()).To(Equal(ComplexVectorSpaces.Matrix{
 			{1 + 2i, 5 + 6i},
 			{3 + 4i, 7 + 8i},
 		}))
@@ -155,11 +154,32 @@ var _ = Describe("3ComplexVectorSpaces", func() {
 			{2 + 12i, 5 + 2.1i, 2 + 5i},
 			{-19i, 17, 3 - 4.5i},
 		}
-		transposed3x3 := matrix3x3.Transpose()
-		Expect(transposed3x3).To(Equal(ComplexVectorSpaces.Matrix{
+		Expect(matrix3x3.Transpose()).To(Equal(ComplexVectorSpaces.Matrix{
 			{6 - 3i, 2 + 12i, -19i},
 			{0, 5 + 2.1i, 17},
 			{1, 2 + 5i, 3 - 4.5i},
+		}))
+	})
+
+	It("should get the adjoint of matrices", func() {
+		matrix2x2 := ComplexVectorSpaces.Matrix{
+			{1 + 2i, 3 + 4i},
+			{5 + 6i, 7 + 8i},
+		}
+		Expect(matrix2x2.Adjoint()).To(Equal(ComplexVectorSpaces.Matrix{
+			{1 - 2i, 5 - 6i},
+			{3 - 4i, 7 - 8i},
+		}))
+
+		matrix3x3 := ComplexVectorSpaces.Matrix{
+			{6 - 3i, 0, 1},
+			{2 + 12i, 5 + 2.1i, 2 + 5i},
+			{-19i, 17, 3 - 4.5i},
+		}
+		Expect(matrix3x3.Adjoint()).To(Equal(ComplexVectorSpaces.Matrix{
+			{6 + 3i, 2 - 12i, 19i},
+			{0, 5 - 2.1i, 17},
+			{1, 2 - 5i, 3 + 4.5i},
 		}))
 	})
 })
