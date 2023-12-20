@@ -1,6 +1,6 @@
 package ComplexVectorSpaces
 
-type Scalar complex128
+type Scalar = complex128
 
 // Column of scalars
 type Vector []Scalar
@@ -48,6 +48,19 @@ func (vector Vector) ScalarMultiply(multiplier Scalar) Vector {
 	}
 
 	return product
+}
+
+// Average time complexity: O(n)
+// Worst time complexity:   O(n)
+// Space complexity:        O(n)
+func (vector Vector) Conjugate() Vector {
+	conjugate := make(Vector, len(vector))
+
+	for index, scalar := range vector {
+		conjugate[index] = complex(real(scalar), -imag(scalar))
+	}
+
+	return conjugate
 }
 
 // Average time complexity: O(n^2)
@@ -110,6 +123,19 @@ func (matrix Matrix) Multiply(multiplier Matrix) Matrix {
 	}
 
 	return product
+}
+
+// Average time complexity: O(n^2)
+// Worst time complexity:   O(n^2)
+// Space complexity:        O(n^2)
+func (matrix Matrix) Conjugate() Matrix {
+	conjugate := make(Matrix, len(matrix))
+
+	for columnIndex := range conjugate {
+		conjugate[columnIndex] = matrix[columnIndex].Conjugate()
+	}
+
+	return conjugate
 }
 
 // Average time complexity: O(n^3)

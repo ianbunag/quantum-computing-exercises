@@ -34,6 +34,12 @@ var _ = Describe("3ComplexVectorSpaces", func() {
 		Expect(productFromComplex).To(Equal(ComplexVectorSpaces.Vector{5 + 1i, 2 - 6i}))
 	})
 
+	It("should get the conjugate of vectors", func() {
+		vector := ComplexVectorSpaces.Vector{1 + 2i, -3 + 4i}
+
+		Expect(vector.Conjugate()).To(Equal(ComplexVectorSpaces.Vector{1 - 2i, -3 - 4i}))
+	})
+
 	It("should add matrices", func() {
 		matrix1 := ComplexVectorSpaces.Matrix{
 			{1 + 2i, 3 + 4i},
@@ -120,6 +126,17 @@ var _ = Describe("3ComplexVectorSpaces", func() {
 		}
 		identityProduct := matrix1.Multiply(identityMatrix)
 		Expect(identityProduct).To(Equal(matrix1))
+	})
+
+	It("shoulg get the conjugate of matrices", func() {
+		matrix := ComplexVectorSpaces.Matrix{
+			{1 + 2i, 3 + 4i},
+			{5 + 6i, 7 + 8i},
+		}
+		Expect(matrix.Conjugate()).To(Equal(ComplexVectorSpaces.Matrix{
+			{1 - 2i, 3 - 4i},
+			{5 - 6i, 7 - 8i},
+		}))
 	})
 
 	It("should transpose matrices", func() {
