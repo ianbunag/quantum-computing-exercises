@@ -138,8 +138,8 @@ func (matrix Matrix) Conjugate() Matrix {
 	return conjugated
 }
 
-// Average time complexity: O(n^3)
-// Worst time complexity:   O(n^3)
+// Average time complexity: O(n log n)
+// Worst time complexity:   O(n log n)
 // Space complexity:        O(n^2)
 func (matrix Matrix) Transpose() Matrix {
 	transposed := make(Matrix, len(matrix))
@@ -150,18 +150,16 @@ func (matrix Matrix) Transpose() Matrix {
 	}
 
 	for columnIndex := range transposed {
-		for rowIndex := range transposed[columnIndex] {
-			if rowIndex > columnIndex {
-				transposed[rowIndex][columnIndex], transposed[columnIndex][rowIndex] = transposed[columnIndex][rowIndex], transposed[rowIndex][columnIndex]
-			}
+		for rowIndex := len(transposed[columnIndex]) - 1; rowIndex > columnIndex; rowIndex-- {
+			transposed[rowIndex][columnIndex], transposed[columnIndex][rowIndex] = transposed[columnIndex][rowIndex], transposed[rowIndex][columnIndex]
 		}
 	}
 
 	return transposed
 }
 
-// Average time complexity: O(n^3)
-// Worst time complexity:   O(n^3)
+// Average time complexity: O(n log n)
+// Worst time complexity:   O(n log n)
 // Space complexity:        O(n^2)
 func (matrix Matrix) Adjoint() Matrix {
 	adjointed := make(Matrix, len(matrix))
@@ -171,10 +169,8 @@ func (matrix Matrix) Adjoint() Matrix {
 	}
 
 	for columnIndex := range adjointed {
-		for rowIndex := range adjointed[columnIndex] {
-			if rowIndex > columnIndex {
-				adjointed[rowIndex][columnIndex], adjointed[columnIndex][rowIndex] = adjointed[columnIndex][rowIndex], adjointed[rowIndex][columnIndex]
-			}
+		for rowIndex := len(adjointed[columnIndex]) - 1; rowIndex > columnIndex; rowIndex-- {
+			adjointed[rowIndex][columnIndex], adjointed[columnIndex][rowIndex] = adjointed[columnIndex][rowIndex], adjointed[rowIndex][columnIndex]
 		}
 	}
 
