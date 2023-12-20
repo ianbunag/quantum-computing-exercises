@@ -100,7 +100,7 @@ func (matrix Matrix) Multiply(multiplier Matrix) Matrix {
 	product := make(Matrix, len(matrix))
 
 	for columnIndex := range product {
-		product[columnIndex] = make(Vector, len(matrix))
+		product[columnIndex] = make(Vector, len(matrix[columnIndex]))
 
 		for rowIndex := range product[columnIndex] {
 			for correspondingIndex := 0; correspondingIndex < len(matrix); correspondingIndex++ {
@@ -110,4 +110,26 @@ func (matrix Matrix) Multiply(multiplier Matrix) Matrix {
 	}
 
 	return product
+}
+
+// Average time complexity: O(n^3)
+// Worst time complexity:   O(n^3)
+// Space complexity:        O(n^2)
+func (matrix Matrix) Transpose() Matrix {
+	transposed := make(Matrix, len(matrix))
+
+	for columnIndex := range transposed {
+		transposed[columnIndex] = make(Vector, len(matrix[columnIndex]))
+		copy(transposed[columnIndex], matrix[columnIndex])
+	}
+
+	for columnIndex := range transposed {
+		for rowIndex := range transposed[columnIndex] {
+			if rowIndex > columnIndex {
+				transposed[rowIndex][columnIndex], transposed[columnIndex][rowIndex] = transposed[columnIndex][rowIndex], transposed[rowIndex][columnIndex]
+			}
+		}
+	}
+
+	return transposed
 }
