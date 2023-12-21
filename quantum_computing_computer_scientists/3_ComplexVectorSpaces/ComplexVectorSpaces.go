@@ -185,3 +185,11 @@ func (matrix Matrix) Adjoint() Matrix {
 
 	return adjointed
 }
+
+// Average time complexity: O(1)
+// Worst time complexity:   O(1)
+// Space complexity:        O(1)
+// Programming Drill 2.2.3 Write a function that accepts a vector and a matrix and outputs the vector resulting from the “action.”
+func (matrix Matrix) Act(vector Vector) Vector {
+	return matrix.Multiply(Matrix{vector})[0]
+}

@@ -195,4 +195,14 @@ var _ = Describe("3ComplexVectorSpaces", func() {
 			{1, 2 - 5i, 3 + 4.5i},
 		}))
 	})
+
+	It("should act on vectors", func() {
+		matrix := ComplexVectorSpaces.Matrix{
+			{1 + 1i, 2 + 1i},
+			{3 + 1i, 4 + 1i},
+		}
+		vector := ComplexVectorSpaces.Vector{5, 6}
+
+		Expect(matrix.Act(vector)).To(Equal(ComplexVectorSpaces.Vector{23 + 11i, 34 + 11i}))
+	})
 })
