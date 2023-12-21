@@ -1,5 +1,7 @@
 package ComplexVectorSpaces
 
+import "fmt"
+
 type Scalar = complex128
 
 // Column of scalars
@@ -110,14 +112,21 @@ func (matrix Matrix) ScalarMultiply(multiplier Scalar) Matrix {
 // Space complexity:        O(n^2)
 // Programming Drill 2.2.2 Write a function that accepts two complex matrices of the appropriate size. The function should do matrix multiplication and return the result.
 func (matrix Matrix) Multiply(multiplier Matrix) Matrix {
-	product := make(Matrix, len(matrix))
+	matrixColumns, matrixRows := len(matrix), len(matrix[0])
+	multiplierColumns, multiplierRows := len(multiplier), len(multiplier[0])
 
-	for columnIndex := range product {
-		product[columnIndex] = make(Vector, len(matrix[columnIndex]))
+	if matrixColumns != multiplierRows {
+		panic(fmt.Sprintf("The number of columns in the first matrix (%d) must equal the number of rows in the second matrix (%d)", len(matrix), len(multiplier[0])))
+	}
 
-		for rowIndex := range product[columnIndex] {
-			for correspondingIndex := 0; correspondingIndex < len(matrix); correspondingIndex++ {
-				product[columnIndex][rowIndex] += multiplier[columnIndex][correspondingIndex] * matrix[correspondingIndex][rowIndex]
+	product := make(Matrix, multiplierColumns)
+
+	for columnIndex := 0; columnIndex < multiplierColumns; columnIndex += 1 {
+		product[columnIndex] = make(Vector, matrixRows)
+
+		for rowIndex := 0; rowIndex < matrixRows; rowIndex += 1 {
+			for correspondingIndex := 0; correspondingIndex < matrixColumns; correspondingIndex += 1 {
+				product[columnIndex][rowIndex] += matrix[correspondingIndex][rowIndex] * multiplier[columnIndex][correspondingIndex]
 			}
 		}
 	}

@@ -126,6 +126,19 @@ var _ = Describe("3ComplexVectorSpaces", func() {
 		}
 		identityProduct := matrix1.Multiply(identityMatrix)
 		Expect(identityProduct).To(Equal(matrix1))
+
+		quantumState := ComplexVectorSpaces.Matrix{
+			{1, 1, 1},
+		}
+		quantumChanges := ComplexVectorSpaces.Matrix{
+			{1, 2, 3},
+			{4, 5, 6},
+			{7, 8, 9},
+		}
+		quantumTransformation := quantumChanges.Multiply(quantumState)
+		Expect(quantumTransformation).To(Equal(ComplexVectorSpaces.Matrix{
+			{12 + 0i, 15 + 0i, 18 + 0i},
+		}))
 	})
 
 	It("shoulg get the conjugate of matrices", func() {
